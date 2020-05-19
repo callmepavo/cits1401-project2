@@ -90,6 +90,6 @@ def getRegularisedLists(digit_lists):
     for i in range(len(digit_lists)):
         total = sum( digit_lists[i] )
         for j in range(len( digit_lists[i] )):
-            reg_lists[i].append(digit_lists[i][j] / total)
+            reg_lists[i].append( round(digit_lists[i][j] / total, 4) )
     
     return(reg_lists)
