@@ -6,6 +6,7 @@ TODO
  - Comments
  - Edge cases
  - Reread project spec
+ - Find out how to handle reading 0 as a numbers first digit
 '''
 
 
@@ -47,7 +48,7 @@ def getNumbers(lines):
     numbers = []
     lines_sans_header = lines[1:]
     for record in lines_sans_header:
-        # remove \n, split on comma, remove names
+        # remove \n, split on comma, remove first item (name)
         record_as_list = record.replace("\n", "").split(",")[1:]
         # remove blank from end if there is one
         if len(record_as_list) > 0 and record_as_list[-1] == '':
