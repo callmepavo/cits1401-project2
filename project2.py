@@ -33,7 +33,7 @@ def processFile(filename):
         return(None)
     
     lines = [line for line in file]
-    file.close()    
+    file.close()
     
     return(lines)
 
