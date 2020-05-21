@@ -13,13 +13,11 @@ TODO
 def main(filename, no_places, regularise=False):
     lines = processFile(filename)
     if lines == None:
-        return([])
+         return([])
+    
     all_numbers = getNumbers(lines)
     
-    digit_lists = [[] for i in range(no_places)]
-    for i in range(no_places):
-        digit_lists[i] = getDigitCount(all_numbers, i) 
-    
+    digit_lists = [getDigitCount(all_numbers, i) for i in range(no_places)]
     
     if regularise:
         return(getRegularisedLists(digit_lists))
@@ -34,9 +32,7 @@ def processFile(filename):
         print("Error: File not found!  Exiting gracefully.")
         return(None)
     
-    lines = []
-    for line in file:
-        lines.append(line)        
+    lines = [line for line in file]
     file.close()    
     
     return(lines)
@@ -79,7 +75,7 @@ def getDigitCount(all_numbers, position):
         except IndexError:
             pass
     
-    digits = digits[1:] + [digits[0]] #rotate so 0 count is last position
+    digits = digits[1:] + [digits[0]] # rotate so 0 count is last position
     
     return(digits)
 
