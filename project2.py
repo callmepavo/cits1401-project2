@@ -9,14 +9,22 @@ TODO
  - Find out how to handle reading 0 as a numbers first digit
 '''
 
-
 def main(filename, no_places, regularise=False):
+    # Validate inputs
+    if not (isinstance(filename, str) and 
+            isinstance(no_places, int) and
+            isinstance(regularise, bool)):
+        print("Error: Input type wrong.  Exiting gracefully.")
+        return([])
+    if no_places < 1:
+        print("Error: Num places not positive.  Exiting gracefully.")
+        return([])
+    # Get lines from file
     lines = processFile(filename)
     if lines == None:
          return([])
     
     all_numbers = getNumbers(lines)
-    
     digit_lists = [getDigitCount(all_numbers, i) for i in range(no_places)]
     
     if regularise:
@@ -37,18 +45,13 @@ def processFile(filename):
     
     return(lines)
 
-
 # Returns all the valid numbers from the file
 # Extracts from lines and sanitises them
 def getNumbers(lines):
     numbers = []
-    lines_sans_header = lines[1:]
-    for record in lines_sans_header:
-        # remove \n, split on comma, remove first item (name)
-        record_as_list = record.replace("\n", "").split(",")[1:]
-        # remove blank from end if there is one
-        if len(record_as_list) > 0 and record_as_list[-1] == '':
-            del record_as_list[-1] 
+    for record in lines:
+        # remove \n, split on comma
+        record_as_list = record.replace("\n", "").split(",")
         
         for number in record_as_list:
             try: # if its not a number, skip it
@@ -65,10 +68,9 @@ def getNumbers(lines):
     
     return(numbers)
 
-
 # Returns list of counts for each digit in position from list of all numbers
 def getDigitCount(all_numbers, position):
-    digits = [0 for i in range(10)]
+    digits = [0 for i in range(10)] # Create a list with inital values
     for number in all_numbers:
         try: # if there isn't a digit at position, ignore error
             digits[int(number[position])] += 1
@@ -79,13 +81,14 @@ def getDigitCount(all_numbers, position):
     
     return(digits)
 
-
+# Returns input lists as rounded fractions
 def getRegularisedLists(digit_lists):
     # fill reg_lists with correct num of empty lists
     reg_lists = [[] for i in range(len(digit_lists))] 
     
     for i in range(len(digit_lists)):
         total = sum( digit_lists[i] )
+        if total == 0: continue # Skip if there are no digits
         for j in range(len( digit_lists[i] )):
             reg_lists[i].append( round(digit_lists[i][j] / total, 4) )
     
