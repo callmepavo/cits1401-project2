@@ -54,15 +54,20 @@ def getNumbers(lines):
         record_as_list = record.replace("\n", "").split(",")
         
         for number in record_as_list:
+            # skip if contains letters, do this since 4e5 is valid float()
+            # input but invalid for this program
+            if number.isupper() or number.islower():
+                continue
             try: # if its not a number, skip it
-                float(number)
-            except ValueError:
+                # float() removes formats .45 to 0.45 and changes 05 to 5.0
+                # int() turns 0.45 to 0 or 5.0 to 5
+                # str() converts now sanitised num to string
+                number = str(int(float((number))))
+            except ValueError: # if error occurs its not a valid number, skip it
                 continue
             
             if number[0] == "-": # remove negative sign
                 number = number[1:]
-            if "." in number: # remove everything after decimal point
-                number = number[:number.index(".")]
             
             numbers.append(number) # append sanitised string number to numbers
     
