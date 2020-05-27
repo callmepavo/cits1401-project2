@@ -61,13 +61,11 @@ def getNumbers(lines):
             try: # if its not a number, skip it
                 # float() removes formats .45 to 0.45 and changes 05 to 5.0
                 # int() turns 0.45 to 0 or 5.0 to 5
+                # abs() makes number positive -5 to 5
                 # str() converts now sanitised num to string
-                number = str(int(float((number))))
+                number = str(abs(int(float((number)))))
             except ValueError: # if error occurs its not a valid number, skip it
                 continue
-            
-            if number[0] == "-": # remove negative sign
-                number = number[1:]
             
             numbers.append(number) # append sanitised string number to numbers
     
