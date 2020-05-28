@@ -15,12 +15,12 @@ def main(filename, no_places, regularise=False):
             and isinstance(no_places, int)
             and (isinstance(regularise, bool) 
                  or regularise == 0
-                 or regularise == 1)    ):
-        print("Error: Input type wrong.  Exiting gracefully.")
+                 or regularise == 1)         ):
+        print("Error: Parameter type wrong.  Exiting gracefully.")
         return([])
     
     if no_places < 1:
-        print("Error: Num places not positive.  Exiting gracefully.")
+        print("Error: no_places not positive.  Exiting gracefully.")
         return([])
     # Get lines from file
     lines = processFile(filename)
