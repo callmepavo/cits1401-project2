@@ -11,11 +11,14 @@ TODO
 
 def main(filename, no_places, regularise=False):
     # Validate inputs
-    if not (isinstance(filename, str) and 
-            isinstance(no_places, int) and
-            isinstance(regularise, bool)):
+    if not (isinstance(filename, str)
+            and isinstance(no_places, int)
+            and (isinstance(regularise, bool) 
+                 or regularise == 0
+                 or regularise == 1)    ):
         print("Error: Input type wrong.  Exiting gracefully.")
         return([])
+    
     if no_places < 1:
         print("Error: Num places not positive.  Exiting gracefully.")
         return([])
