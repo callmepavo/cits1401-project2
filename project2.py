@@ -1,13 +1,6 @@
 # CITS1401  Project 2
 # Zach Manson 22903345
 # 2020-05-14
-'''
-TODO
- - Comments
- - Edge cases
- - Reread project spec
- - Find out how to handle reading 0 as a numbers first digit
-'''
 
 def main(filename, no_places, regularise=False):
     # Validate inputs
